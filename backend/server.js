@@ -29,17 +29,17 @@ app.delete('/api/todos/:id', deleteTodo);
 // Connect to MongoDB and start server
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI)
-    .then(() => {
-      console.log('Connected to MongoDB');
-      app.listen(PORT, () => {
-        console.log(`Backend server running on http://localhost:${PORT}`);
-      });
-    })
-    .catch(err => {
-      console.error('MongoDB connection error:', err);
-      process.exit(1);
-    });
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('MongoDB connection error:', err));
 } else {
   console.error('FATAL ERROR: MONGODB_URI is not defined in .env file.');
-  process.exit(1);
 }
+
+// Only listen locally, Vercel will handle routing for serverless functions
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Backend server running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
