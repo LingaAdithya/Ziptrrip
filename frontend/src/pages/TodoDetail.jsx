@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Save, Trash2 } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/todos';
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/_/backend/api/todos' : 'http://localhost:5000/api/todos');
 
 export default function TodoDetail() {
   const location = useLocation();

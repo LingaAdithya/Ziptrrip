@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusCircle, CheckCircle, Circle, Trash2, ArrowRight } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/todos';
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/_/backend/api/todos' : 'http://localhost:5000/api/todos');
 
 export default function TodoList() {
   const [todos, setTodos] = useState([]);
